@@ -1,37 +1,54 @@
 *** Settings ***
-Library    SeleniumLibrary
+Library          SeleniumLibrary
+Library          FakerLibrary    locale=pt_BR
+Resource         setup_teardown.robot
+Test Setup       Dado que eu acesse o Organa
+Test Teardown    Fechar o navegador
 
 *** Variables ***
-${URL}                    http://localhost:3000/
 ${CAMPO_NOME}             id:form-nome
 ${CAMPO_CARGO}            id:form-cargo
 ${CAMPO_IMAGEM}           id:form-imagem
 ${CAMPO_TIME}             class:lista-suspensa
 ${BOTAO_CARD}             id:form-botao
-${OPCAO_PROGRAMACAO}      //option[contains(.,'Programação')]
-${OPCAO_FRONT}            //option[contains(.,'Front-End')]
-${OPCAO_DADOS}            //option[contains(.,'Data Science')]
-${OPCAO_DEVOPS}           //option[contains(.,'Devops')] 
-${OPCAO_UX}               //option[contains(.,'UX e Design')]
-${OPCAO_MOBILE}           //option[contains(.,'Mobile')]
-${OPCAO_INOVACAO}         //option[contains(.,'Inovação e Gestão')]
+@{selecionar_times}
+...      //option[contains(.,'Programação')]
+...      //option[contains(.,'Front-End')]
+...      //option[contains(.,'Data Science')]
+...      //option[contains(.,'Devops')] 
+...      //option[contains(.,'UX e Design')]
+...      //option[contains(.,'Mobile')]
+...      //option[contains(.,'Inovação e Gestão')]
 
 *** Test Cases ***
 
-Verificar se ao preencher os campos do formulário corretamente os dados são inseridos na lista e se um novo card é criado no time esperado
-    E preencho os campos do formulário
+Validar preenchimento de formulário
+    Dado que preencho os campos do formulário
     Quando clicar no botão criar card
     Então deve indentificar o card no time esperado
 
+Validar criação de mais de um card
+    Dado que preencho os campos do formulário
+    Quando clicar no botão criar card
+    Então identificar 3 cards no time esperado
+
+Validar se é possível criar um1 card para cada time
+    Dado que preencho os campos do formulário
+    Quando clicar no botão criar card
+    Então crio e identifico mais de um card em cada time disponível
+    
    
 *** Keywords ***
 
-E preencho os campos do formulário
-    Input Text        ${CAMPO_NOME}     Alexandre
-    Input Text        ${CAMPO_CARGO}    QA
-    Input Text        ${CAMPO_IMAGEM}   https://picsum.photos/200/300
+Dado que preencho os campos do formulário
+    ${Nome}           FakerLibrary.First Name
+    Input Text        ${CAMPO_NOME}     ${Nome}
+    ${Cargo}           FakerLibrary.job
+    Input Text        ${CAMPO_CARGO}    ${Cargo} 
+    ${Imagem}           FakerLibrary.Image Url    width=100    height=100
+    Input Text        ${CAMPO_IMAGEM}   ${Imagem}
     Click Element     ${CAMPO_TIME}
-    Click Element     ${OPCAO_PROGRAMACAO} 
+    Click Element     ${selecionar_times}[0] 
 
 Quando clicar no botão criar card
     Click Element     ${BOTAO_CARD} 
@@ -39,4 +56,22 @@ Quando clicar no botão criar card
 Então deve indentificar o card no time esperado
     Element Should Be Visible    class:colaborador
 
+Então identificar 3 cards no time esperado
+    FOR    ${1}    IN RANGE    1    3
+        Dado que preencho os campos do formulário
+        Quando clicar no botão criar card
 
+    END
+    Sleep    10
+
+Então crio e identifico mais de um card em cada time disponível
+    FOR    ${indice}    ${time}    IN ENUMERATE    @{selecionar_times}
+        Dado que preencho os campos do formulário
+        Click Element    ${time}
+        Quando clicar no botão criar card
+    
+    END
+    Sleep    10
+    
+    
+    
