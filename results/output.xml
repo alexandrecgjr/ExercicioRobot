@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.14.3 on win32)" generated="2026-02-10T13:43:02.004822" rpa="false" schemaversion="5">
+<suite id="s1" name="ExercicioRobot" source="C:\Users\alexandre.junior\OneDrive - Instituto de Pesquisas Eldorado\Documents\projetos-automaçaõ\ExercicioRobot">
+<suite id="s1-s1" name="Primeiro Teste" source="C:\Users\alexandre.junior\OneDrive - Instituto de Pesquisas Eldorado\Documents\projetos-automaçaõ\ExercicioRobot\primeiro_teste.robot">
+<test id="s1-s1-t1" name="Verificar se ao preencher os campos do formulário corretamente os dados são inseridos na lista e se um novo card é criado no time esperado" line="21">
+<kw name="Dado que eu acesse o Organa">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-02-10T13:43:02.251938" level="INFO">Opening browser 'Chrome' to base url 'http://localhost:3000/'.</msg>
+<arg>url=http://localhost:3000/</arg>
+<arg>browser=Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-02-10T13:43:02.251563" elapsed="2.195587"/>
+</kw>
+<status status="PASS" start="2026-02-10T13:43:02.250552" elapsed="2.196929"/>
+</kw>
+<kw name="E preencho os campos do formulário">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-10T13:43:04.449303" level="INFO">Typing text 'Alexandre' into text field 'id:form-nome'.</msg>
+<arg>${CAMPO_NOME}</arg>
+<arg>Alexandre</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-10T13:43:04.448670" elapsed="0.139667"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-10T13:43:04.590085" level="INFO">Typing text 'QA' into text field 'id:form-cargo'.</msg>
+<arg>${CAMPO_CARGO}</arg>
+<arg>QA</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-10T13:43:04.589242" elapsed="0.083041"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-02-10T13:43:04.673156" level="INFO">Typing text 'https://picsum.photos/200/300' into text field 'id:form-imagem'.</msg>
+<arg>${CAMPO_IMAGEM}</arg>
+<arg>https://picsum.photos/200/300</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-10T13:43:04.672692" elapsed="0.103178"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-10T13:43:04.777257" level="INFO">Clicking element 'class:lista-suspensa'.</msg>
+<arg>${CAMPO_TIME}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-10T13:43:04.776247" elapsed="0.081877"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-10T13:43:04.859136" level="INFO">Clicking element '//option[contains(.,'Programação')]'.</msg>
+<arg>${OPCAO_PROGRAMACAO}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-10T13:43:04.858394" elapsed="0.034151"/>
+</kw>
+<status status="PASS" start="2026-02-10T13:43:04.448121" elapsed="0.444625"/>
+</kw>
+<kw name="Quando clicar no botão criar card">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-02-10T13:43:04.893861" level="INFO">Clicking element 'id:form-botao'.</msg>
+<arg>${BOTAO_CARD}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-02-10T13:43:04.893623" elapsed="0.081680"/>
+</kw>
+<status status="PASS" start="2026-02-10T13:43:04.893296" elapsed="0.082284"/>
+</kw>
+<kw name="Então deve indentificar o card no time esperado">
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-02-10T13:43:05.114504" level="INFO">Element 'class:colaborador' is displayed.</msg>
+<arg>class:colaborador</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-02-10T13:43:04.976500" elapsed="0.138279"/>
+</kw>
+<status status="PASS" start="2026-02-10T13:43:04.976011" elapsed="0.138935"/>
+</kw>
+<status status="PASS" start="2026-02-10T13:43:02.247523" elapsed="2.867880"/>
+</test>
+<status status="PASS" start="2026-02-10T13:43:02.047382" elapsed="3.073904"/>
+</suite>
+<status status="PASS" start="2026-02-10T13:43:02.010342" elapsed="3.115821"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="ExercicioRobot" id="s1" pass="1" fail="0" skip="0">ExercicioRobot</stat>
+<stat name="Primeiro Teste" id="s1-s1" pass="1" fail="0" skip="0">ExercicioRobot.Primeiro Teste</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
