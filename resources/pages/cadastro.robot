@@ -1,16 +1,16 @@
 *** Settings ***
-Library          SeleniumLibrary
-Library          FakerLibrary    locale=pt_BR
-Resource         setup_teardown.robot
-Test Setup       Dado que eu acesse o Organa
-Test Teardown    Fechar o navegador
+
+Resource    ../main.robot
+
 
 *** Variables ***
+
 ${CAMPO_NOME}             id:form-nome
 ${CAMPO_CARGO}            id:form-cargo
 ${CAMPO_IMAGEM}           id:form-imagem
 ${CAMPO_TIME}             class:lista-suspensa
 ${BOTAO_CARD}             id:form-botao
+
 @{selecionar_times}
 ...      //option[contains(.,'Programação')]
 ...      //option[contains(.,'Front-End')]
@@ -20,24 +20,6 @@ ${BOTAO_CARD}             id:form-botao
 ...      //option[contains(.,'Mobile')]
 ...      //option[contains(.,'Inovação e Gestão')]
 
-*** Test Cases ***
-
-Validar preenchimento de formulário
-    Dado que preencho os campos do formulário
-    Quando clicar no botão criar card
-    Então deve indentificar o card no time esperado
-
-Validar criação de mais de um card
-    Dado que preencho os campos do formulário
-    Quando clicar no botão criar card
-    Então identificar 3 cards no time esperado
-
-Validar se é possível criar um1 card para cada time
-    Dado que preencho os campos do formulário
-    Quando clicar no botão criar card
-    Então crio e identifico mais de um card em cada time disponível
-    
-   
 *** Keywords ***
 
 Dado que preencho os campos do formulário
@@ -72,6 +54,11 @@ Então crio e identifico mais de um card em cada time disponível
     
     END
     Sleep    10
-    
-    
-    
+
+Dado que eu clique no botão criar card
+    Click Element     ${BOTAO_CARD} 
+
+Então sistema apresenta mensagem de campo obrigatório
+    Element Should Be Visible    id:form-nome-erro
+    Element Should Be Visible    id:form-cargo-erro
+    Element Should Be Visible    id:form-times-erro
