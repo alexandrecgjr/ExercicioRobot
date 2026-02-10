@@ -19,16 +19,12 @@ ${OPCAO_INOVACAO}         //option[contains(.,'Inovação e Gestão')]
 *** Test Cases ***
 
 Verificar se ao preencher os campos do formulário corretamente os dados são inseridos na lista e se um novo card é criado no time esperado
-    Dado que eu acesse o Organa
     E preencho os campos do formulário
     Quando clicar no botão criar card
     Então deve indentificar o card no time esperado
 
    
 *** Keywords ***
-
-Dado que eu acesse o Organa
-    Open Browser    url=http://localhost:3000/    browser=Chrome
 
 E preencho os campos do formulário
     Input Text        ${CAMPO_NOME}     Alexandre
